@@ -632,7 +632,7 @@ class OpenStackShell(object):
                 'image': args.image,
                 'flavor': args.flavor,
                 'status': args.status,
-                'instance_name': args.display_name}
+                'instance_name': args.instance_name}
         if recurse_zones:
             to_print = ['UUID', 'Name', 'Status', 'Public IP', 'Private IP']
         else:
