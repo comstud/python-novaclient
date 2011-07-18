@@ -593,21 +593,32 @@ class OpenStackShell(object):
         metavar='<ip6_regexp>',
         default=None,
         help='Search with regular expression match by IPv6 address')
-    @arg('--server_name',
-        dest='server_name',
-        metavar='<name_regexp>',
-        default=None,
-        help='Search with regular expression match by server name')
     @arg('--name',
-        dest='display_name',
-        metavar='<name_regexp>',
-        default=None,
-        help='Search with regular expression match by display name')
-    @arg('--instance_name',
         dest='name',
         metavar='<name_regexp>',
         default=None,
+        help='Search with regular expression match by name')
+    @arg('--instance_name',
+        dest='instance_name',
+        metavar='<name_regexp>',
+        default=None,
         help='Search with regular expression match by instance name')
+    @arg('--status',
+        dest='status',
+        metavar='<status>',
+        default=None,
+        help='Search by server status')
+    @arg('--flavor',
+        dest='flavor',
+        metavar='<flavor>',
+        type=int,
+        default=None,
+        help='Search by flavor ID')
+    @arg('--image',
+        dest='image',
+        metavar='<image>',
+        default=None,
+        help='Search by image ID')
     def do_list(self, args):
         """List active servers."""
         recurse_zones = args.recurse_zones
@@ -618,8 +629,10 @@ class OpenStackShell(object):
                 'ip': args.ip,
                 'ip6': args.ip6,
                 'name': args.name,
-                'server_name': args.server_name,
-                'display_name': args.display_name}
+                'image': args.image,
+                'flavor': args.flavor,
+                'status': args.status,
+                'instance_name': args.display_name}
         if recurse_zones:
             to_print = ['UUID', 'Name', 'Status', 'Public IP', 'Private IP']
         else:
