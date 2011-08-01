@@ -196,18 +196,14 @@ class Server(base.Resource):
         """
         Shortcut to get this server's primary public IP address.
         """
-        if len(self.addresses['public']) == 0:
-            return ""
-        return self.addresses['public']
+        return self.addresses.get('public') or ""
 
     @property
     def private_ip(self):
         """
         Shortcut to get this server's primary private IP address.
         """
-        if len(self.addresses['private']) == 0:
-            return ""
-        return self.addresses['private']
+        return self.addresses.get('private') or ""
 
 
 class ServerManager(base.BootingManagerWithFind):
